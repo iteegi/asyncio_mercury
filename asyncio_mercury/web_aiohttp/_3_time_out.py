@@ -5,7 +5,7 @@ from aiohttp import ClientSession
 
 async def fetch_status(session: ClientSession,
                        url: str) -> int:
-    ten_millis = aiohttp.ClientTimeout(total=.01)
+    ten_millis = aiohttp.ClientTimeout(total=100)
     async with session.get(url, timeout=ten_millis) as result:
         return result.status
 
@@ -16,5 +16,6 @@ async def main():
         await fetch_status(session, 'https://google.com')
 
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    asyncio.run(main())
