@@ -3,10 +3,17 @@ import aiohttp
 from aiohttp import ClientSession
 
 
+# async def fetch_status(session: ClientSession,
+#                        url: str) -> int:
+#     ten_millis = aiohttp.ClientTimeout(total=100)
+#     async with session.get(url, timeout=ten_millis) as result:
+#         return result.status
+
 async def fetch_status(session: ClientSession,
-                       url: str) -> int:
-    ten_millis = aiohttp.ClientTimeout(total=100)
-    async with session.get(url, timeout=ten_millis) as result:
+                       url: str, 
+                       delay: int = 0 ) -> int:
+    await asyncio.sleep(delay)
+    async with session.get(url) as result:
         return result.status
 
 
